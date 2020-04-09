@@ -1,0 +1,13 @@
+<nav mat-tab-nav-bar class="mat-elevation-z8" >
+    <mat-toolbar> 
+     <span style="margin-right: 30px ;">Movies List</span>
+     <a mat-tab-link class="main-tab" routerLink='./home'  routerLinkActive='current-tab' [routerLinkActiveOptions]='{exact:true}'>
+       <span>Home</span>
+     </a>
+     <a mat-tab-link class="main-tab" routerLink='./about' routerLinkActive='current-tab' >
+       <span>About</span>
+     </a>
+    </mat-toolbar>
+    <button (click)="logout()"> Logout</button>
+ </nav>
+ 

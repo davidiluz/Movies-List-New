@@ -1,0 +1,24 @@
+<div *ngIf="movie != null" style="border:1px solid">
+    <h2 style="text-align: center;">
+        {{movie.name}}
+    </h2>
+
+    <form [formGroup]="form" (ngSubmit)="submit()">
+        <p>
+          <!-- <mat-form-field> -->
+            <input type="text"  placeholder="Email" formControlName="name">
+          <!-- </mat-form-field> -->
+        </p>
+      
+        <p>
+          <!-- <mat-form-field> -->
+            <input type="text"  placeholder="Year" formControlName="year">
+          <!-- </mat-form-field> -->
+        </p>
+      
+        <div class="button">
+          <button type="submit" [disabled]="!form.valid">Save</button>
+        </div>
+      
+      </form>
+</div>

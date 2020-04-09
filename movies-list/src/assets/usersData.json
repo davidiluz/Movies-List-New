@@ -1,0 +1,22 @@
+{
+    "users": [
+        {
+            "id": 1,
+            "name": "david",
+            "email": "david@iluz",
+            "password": "A123456"
+        },
+        {
+            "id": 2,
+            "name": "michael",
+            "email": "michael@iluz",
+            "password": "A12345"
+        },
+        {
+            "id": 3,
+            "name": "shira",
+            "email": "shira@iluz",
+            "password": "Aa123456"
+        }
+    ]
+}

@@ -1,0 +1,13 @@
+<h2 style="text-align:center">
+    My Top Movies
+</h2>
+<div>
+    <div *ngFor="let movie of moviesList;let i=index;" (click)="editMovie(movie)" class="movie" 
+    [ngStyle]="{'background-color':movie.name == selectedMovieName ? '#5f5fe2':'aliceblue',
+    'color': movie.name == selectedMovieName ? 'aliceblue':'#5f5fe2'}">
+        <p>{{movie.name}}</p>
+    </div>
+</div>
+
+
+    <!-- }" -->
