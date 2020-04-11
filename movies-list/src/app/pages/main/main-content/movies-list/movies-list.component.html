@@ -1,13 +1,10 @@
-<h2 style="text-align:center">
-    My Top Movies
-</h2>
-<div>
-    <div *ngFor="let movie of moviesList;let i=index;" (click)="editMovie(movie)" class="movie" 
-    [ngStyle]="{'background-color':movie.name == selectedMovieName ? '#5f5fe2':'aliceblue',
-    'color': movie.name == selectedMovieName ? 'aliceblue':'#5f5fe2'}">
-        <p>{{movie.name}}</p>
-    </div>
-</div>
-
-
-    <!-- }" -->
+<mat-card>
+    <mat-card-title>Top Movies</mat-card-title>
+    <mat-divider></mat-divider>
+    <!-- <div style="padding: 10px;max-height: 500px;overflow-y: auto;"> -->
+        <div *ngFor="let movie of moviesList;let i=index;" (click)="editMovie(movie)" >
+                <mat-card [ngClass]="{'movie':true,'selected-movie':movie.name == selectedMovieName}">{{movie.name}}</mat-card>
+        </div>
+       
+    <!-- </div> -->
+</mat-card>

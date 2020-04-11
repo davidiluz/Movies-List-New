@@ -8,15 +8,16 @@ import { AboutComponent } from './about/about.component';
 import { MenuComponent } from './menu/menu.component';
 import { MainContentComponent } from './main-content/main-content.component';
 import { MoviesListComponent } from './main-content/movies-list/movies-list.component';
+import { EditMovieComponent } from './main-content/edit-movie/edit-movie.component';
 
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatTabsModule } from '@angular/material/tabs';
-import { MatListModule } from '@angular/material/list';
 import { MatDividerModule } from '@angular/material/divider';
-import { ReactiveFormsModule } from '@angular/forms';
-import { EditMovieComponent } from './main-content/edit-movie/edit-movie.component';
-import { MatTableModule } from '@angular/material/table';
+import { FormsModule } from '@angular/forms';
+import { MatCardModule } from '@angular/material/card';
+import { MatInputModule } from '@angular/material/input';
+import { MatButtonModule } from '@angular/material/button';
 import { StoreModule } from '@ngrx/store';
 import { reducer } from './state/movies.reducers';
 
@@ -31,11 +32,12 @@ import { reducer } from './state/movies.reducers';
     MainRoutingModule,
     MatToolbarModule,
     MatTabsModule,
-    MatListModule,
     MatDividerModule,
-    MatTableModule,
-    ReactiveFormsModule,
-    StoreModule.forFeature('movies', reducer)
+    FormsModule,
+    MatCardModule,
+    MatInputModule,
+    MatButtonModule,
+    StoreModule.forFeature('movies', reducer),
   ]
 })
 export class MainModule { }

@@ -1,4 +1,4 @@
-import { movie } from 'src/app/models/movie';
+import { Movie } from 'src/app/models/movie';
 import { Action } from '@ngrx/store';
 
 export enum MoviesActionTypes{
@@ -13,7 +13,7 @@ export enum MoviesActionTypes{
 
 export class SelectMovie implements Action {
     readonly type = MoviesActionTypes.SelectMovie;
-    constructor(public payload: movie) { }
+    constructor(public payload: Movie) { }
 }
 
 export type MoviesActions = SelectMovie;

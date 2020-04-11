@@ -1,24 +1,62 @@
-<div *ngIf="movie != null" style="border:1px solid">
-    <h2 style="text-align: center;">
-        {{movie.name}}
-    </h2>
-
-    <form [formGroup]="form" (ngSubmit)="submit()">
-        <p>
-          <!-- <mat-form-field> -->
-            <input type="text"  placeholder="Email" formControlName="name">
-          <!-- </mat-form-field> -->
-        </p>
-      
-        <p>
-          <!-- <mat-form-field> -->
-            <input type="text"  placeholder="Year" formControlName="year">
-          <!-- </mat-form-field> -->
-        </p>
-      
-        <div class="button">
-          <button type="submit" [disabled]="!form.valid">Save</button>
+<div *ngIf="!hideEditMovie">
+  <mat-card>
+    <mat-card-title>Movie Details</mat-card-title>
+    <mat-divider></mat-divider>
+    <mat-card-content>
+      <div style="margin-top: 7%;" fxLayoutAlign="space-evenly">
+        <div fxFlex="40">
+          <mat-form-field>
+            <input type="text" [disabled]="!allowEdit" matInput [(ngModel)]="movie.name" placeholder="Movie Name">
+          </mat-form-field>
+  
+          <mat-form-field>
+            <input type="text" [disabled]="!allowEdit" matInput [(ngModel)]="movie.year" placeholder="Release Date">
+          </mat-form-field>
+  
+          <mat-form-field>
+            <input type="text" [disabled]="!allowEdit" matInput [(ngModel)]="movie.director" placeholder="Director">
+            
+          </mat-form-field>
         </div>
-      
-      </form>
+        <div fxFlex="40" fxLayout="column">
+          <mat-form-field>
+            <input type="text" [disabled]="!allowEdit" matInput [(ngModel)]="movie.cast" placeholder="Cast">
+          </mat-form-field>
+
+          <mat-form-field>
+            <input type="text" [disabled]="!allowEdit" matInput [(ngModel)]="movie.writers" placeholder="Writers">
+          </mat-form-field>
+
+          <mat-form-field>
+            <input type="text" [disabled]="!allowEdit" matInput [(ngModel)]="movie.awards" placeholder="Awards">
+          </mat-form-field>
+        </div>
+      </div>
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-button>Add A Review</button>
+      <button mat-button>Watch Reviews</button>
+    </mat-card-actions>
+  </mat-card>
 </div>
+
+<!-- <div fxFlex="40" fxLayoutAlign="space-between" fxLayout="column">
+  <div style="display: flex;margin-bottom: 10px;height: 40px;">
+    <p>Rating : </p>
+    <input type="text" matInput [(ngModel)]="movie.rating" style="margin-top: 10px;">
+  </div>
+
+
+  <div style="display: flex;margin-bottom: 10px;height: 40px;">
+    <p>Director : </p>
+    <input type="text" [(ngModel)]="movie.director" placeholder="Director" style="margin-top: 10px;">
+  </div>
+
+
+  <div style="display: flex;margin-bottom: 10px;height: 40px;">
+    <p>Cast : </p>
+    <input type="text" matInput [(ngModel)]="movie.cast" placeholder="Cast" style="margin-top: 10px;">
+  </div>
+</div> -->
+
+<!-- <textarea type="text" matInput [(ngModel)]="movie.description" placeholder="Description"></textarea> -->

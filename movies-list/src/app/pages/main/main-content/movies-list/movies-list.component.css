@@ -1,16 +1,17 @@
-.movie{
-    width:100%;
-    text-align:center;
-    border:1px solid;
-    margin-bottom:10px;
-    align-self: center;
-    color: #5f5fe2;
-    background-color: aliceblue;
-    border-radius: 15px;
 
+.movie{
+    margin-top: 20px;
+    background-color: aliceblue;
+    color:#5f5fe2;
+    text-align: center;
 }
 
 .movie:hover{
     color: aliceblue;
     background-color: #5f5fe2;
+}
+
+.selected-movie{
+    color: aliceblue;
+    background-color: #498de1;
 }

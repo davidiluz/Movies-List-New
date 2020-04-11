@@ -1,11 +1,11 @@
 import * as fromRoot from '../../../state/app.state';
-import { movie } from 'src/app/models/movie';
+import { Movie } from 'src/app/models/movie';
 import { MoviesActions, MoviesActionTypes } from './movies.actions';
 import { createSelector, createFeatureSelector } from '@ngrx/store';
 
 export interface MoviesState {
-    currentMovie: movie | null;
-    movies: movie[];
+    currentMovie: Movie | null;
+    movies: Movie[];
 }
 
 export const initialState: MoviesState = {
