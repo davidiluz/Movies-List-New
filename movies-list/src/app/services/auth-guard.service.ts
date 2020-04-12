@@ -5,7 +5,6 @@ import { Observable } from 'rxjs';
 import { Store } from '@ngrx/store';
 import { getIsUserLoggedIn } from '../pages/login/state/user.reducers';
 import { State } from '../state/app.state';
-import { statSync } from 'fs';
 
 @Injectable()
 export class AuthGuard implements CanActivate {
