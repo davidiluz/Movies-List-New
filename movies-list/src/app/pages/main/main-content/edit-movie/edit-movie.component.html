@@ -20,7 +20,7 @@
         </div>
         <div fxFlex="40" fxLayout="column">
           <mat-form-field>
-            <input type="text" [disabled]="!allowEdit" matInput [(ngModel)]="movie.cast" placeholder="Cast">
+            <input type="text" matInput [(ngModel)]="movie.cast" placeholder="Cast">
           </mat-form-field>
 
           <mat-form-field>
@@ -32,6 +32,11 @@
           </mat-form-field>
         </div>
       </div>
+      <div style="margin-left: 7%;display: grid;">
+        <span style="font-size: 11px;color: darkgrey;margin-bottom: 5px;">Description</span>
+        <textarea matInput style="width: 90%;border: 1px solid grey;padding: 5px;"
+         [(ngModel)]="movie.description" placeholder="Description"></textarea>
+      </div>
     </mat-card-content>
     <mat-card-actions>
       <button mat-button>Add A Review</button>
@@ -39,24 +44,3 @@
     </mat-card-actions>
   </mat-card>
 </div>
-
-<!-- <div fxFlex="40" fxLayoutAlign="space-between" fxLayout="column">
-  <div style="display: flex;margin-bottom: 10px;height: 40px;">
-    <p>Rating : </p>
-    <input type="text" matInput [(ngModel)]="movie.rating" style="margin-top: 10px;">
-  </div>
-
-
-  <div style="display: flex;margin-bottom: 10px;height: 40px;">
-    <p>Director : </p>
-    <input type="text" [(ngModel)]="movie.director" placeholder="Director" style="margin-top: 10px;">
-  </div>
-
-
-  <div style="display: flex;margin-bottom: 10px;height: 40px;">
-    <p>Cast : </p>
-    <input type="text" matInput [(ngModel)]="movie.cast" placeholder="Cast" style="margin-top: 10px;">
-  </div>
-</div> -->
-
-<!-- <textarea type="text" matInput [(ngModel)]="movie.description" placeholder="Description"></textarea> -->

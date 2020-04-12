@@ -1,12 +1,12 @@
 export class Movie{
+    id:number
     name:string;
     year?:string;
-    rating?:number;
-    description?:string;
-    director?:string;
     cast?:string;
-    writers?:string;
+    director?:string;
+    description?:string;
     awards?:string;
+    writers?:string;
     creationUser?:string;
     lastUpdateDate?:string;
 }

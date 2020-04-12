@@ -14,9 +14,6 @@ export class MainContentComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  moviesList: Movie[] = [{ name: 'Harry Potter', year: '2000', description: 'Good!', rating: 8, director: 'david iluz', cast: 'abc def,rst uvw' },
-  { name: 'Ultras', year: '2020', description: 'football fans', rating: 6, director: 'shira iluz', cast: 'abc def,rst uvw' },
-  { name: 'The Popes', year: '2018', description: 'popes', rating: 7, director: 'zion iluz', cast: 'abc def,rst uvw' },
-  ];
+  moviesList: Movie[] = [];
 
 }

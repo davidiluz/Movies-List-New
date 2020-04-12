@@ -10,10 +10,6 @@ import { AppComponent } from './app.component';
 import { LoginModule } from './pages/login/login.module';
 import { MainModule } from './pages/main/main.module';
 import { AuthGuard } from './services/auth-guard.service';
-//import { StoreModule } from '@ngrx/store';
-//import { reducer } from './store/reducers/auth.reducers';
-
-//store
 
 // store dev tools
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
