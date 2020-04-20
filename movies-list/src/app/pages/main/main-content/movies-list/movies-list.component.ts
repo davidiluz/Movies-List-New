@@ -1,8 +1,9 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, OnDestroy } from '@angular/core';
 import { Movie } from 'src/app/models/movie';
-import { Store } from '@ngrx/store';
-import { MoviesState, getSelectedMovie } from '../../state/movies.reducers';
+import { Store, select } from '@ngrx/store';
+import { MoviesState, getSelectedMovie, getMovies } from '../../state/movies.reducers';
 import { SelectMovie } from '../../state/movies.actions';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-movies-list',
@@ -12,18 +13,15 @@ import { SelectMovie } from '../../state/movies.actions';
 export class MoviesListComponent implements OnInit {
 
   constructor(private store: Store<MoviesState>) { }
-  selectedMovieName: string = "";
+  moviesList$: Observable<Movie[]>;
+  selectedMovie$: Observable<Movie>;
   ngOnInit(): void {
-    this.store.select(getSelectedMovie).subscribe(selectedMovie => {
-      if(selectedMovie)
-      this.selectedMovieName = selectedMovie.name;
-    })
+    this.selectedMovie$ = this.store.pipe(select(getSelectedMovie));
+    this.moviesList$ = this.store.pipe(select(getMovies));
   }
 
-  @Input() moviesList: Movie[];
-
-  editMovie(movie: Movie) {
-    //this.selectedMovieName = movie.name;
-    this.store.dispatch(new SelectMovie(movie));
+  editMovie(movieId: number) {
+      this.store.dispatch(new SelectMovie(movieId));
   }
+
 }

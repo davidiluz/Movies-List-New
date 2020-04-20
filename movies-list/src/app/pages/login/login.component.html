@@ -14,7 +14,11 @@
     </mat-form-field>
   </p>
 
-  <div style="text-align: center;">
+  <div class="error-message" *ngIf="errorMessage$ | async as errorMessage">
+    {{errorMessage}}
+  </div>
+
+  <div style="text-align: center;margin-top:15px;">
     <span>
         not registerd ?
       </span>

@@ -18,7 +18,9 @@
                     <input type="password" matInput placeholder="Password" formControlName="password">
                 </mat-form-field>
             </p>
-
+            <div class="error-message" *ngIf="errorMessage$ | async as errorMessage">
+                {{errorMessage}}
+            </div>
 
             <div class="button">
                 <button type="submit" [disabled]="!form.valid" mat-button>Sign Up</button>

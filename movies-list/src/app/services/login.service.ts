@@ -1,31 +1,47 @@
 import { Injectable } from '@angular/core';
-//import usersData from 
 import { User } from '../models/user';
 import { FormControl } from '@angular/forms';
-import { HttpClient } from '@angular/common/http';
-import { Observable, observable, Subject } from 'rxjs';
-import usersData from 'src/assets/usersData.json';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Observable, throwError } from 'rxjs';
+import { Router } from '@angular/router';
+import { map, catchError } from 'rxjs/operators';
 @Injectable()
 export class LoginService {
-    constructor(private http: HttpClient) {
+    constructor(private http: HttpClient, private router: Router) {}
 
-    }
+    httpOptions = {
+        headers: new HttpHeaders({
+            'Content-Type': 'application/json',
+        })
+    };
+
     public LogIn(email: string, password: string): Observable<User> {
-        var subject = new Subject<User>();
-        this.http.get('../../assets/usersData.json')
-            .subscribe((data) => {
-                let xxx = data["users"].find(user => user.email == email && user.password == password);
-                let newUser = new User();
-                if (xxx) {
-                    newUser.id = xxx.id;
-                    newUser.email = xxx.email;
-                    newUser.name = xxx.name;
-                    return subject.next(newUser);
-                }
-                else
-                    return subject.next(null);
-            });
-        return subject.asObservable();
+        return this.http.get('http://localhost:3000/login/' + email + '/' + password)
+            .pipe(
+                map(user => ({
+                    name: user["Name"],
+                    email: user["Email"],
+                    id: user["Id"],
+                    moviesILiked: user["MoviesILiked"],
+                }) as User),
+                catchError(err => {
+                    //console.error(err)
+                    return throwError(err);
+                })
+            )
+    }
+
+    public SignUp(name: string, email: string, password: string): Observable<any> {
+        var body = {
+            'name': name, 'email': email, 'password': password
+        };
+        return this.http.post('http://localhost:3000/sign-up', JSON.stringify(body), this.httpOptions)
+            .pipe(
+                catchError(err => {
+                    console.error(err)
+                    return throwError(err.error);
+                })
+            )
     }
 
     public IsPasswordValid(password: FormControl): { [s: string]: boolean } {
@@ -40,31 +56,5 @@ export class LoginService {
         else
             return { 'validPassword': true };
     }
-
-    public SignUp(newUser: any): number {
-        let isUserExists: boolean;
-        debugger;
-        isUserExists = usersData["users"].find(t => t.email == newUser.email) ? true : false;
-        if (isUserExists)
-            return -1;
-        else {
-            //change json file;
-            const newId : number = usersData["users"].length + 1;
-            newUser.id = newId;
-
-            this.http.post('src/assets/usersData.json',newUser).subscribe( t=>{
-                debugger;
-                console.log(usersData);
-                this.http.get('../../assets/usersData.json')
-                .subscribe((data) => {
-                    console.log(data)
-                })
-            },e=>{debugger; console.log(e)});
-            return newId;
-        }
-
-    }
-
-
 }
 

@@ -11,10 +11,12 @@ import { LoginModule } from './pages/login/login.module';
 import { MainModule } from './pages/main/main.module';
 import { AuthGuard } from './services/auth-guard.service';
 
-// store dev tools
+// store
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '../environments/environment';
 import { StoreModule } from '@ngrx/store';
+import { EffectsModule } from '@ngrx/effects';
+
 @NgModule({
   declarations: [
     AppComponent
@@ -27,6 +29,7 @@ import { StoreModule } from '@ngrx/store';
     MainModule,
     HttpClientModule,
     StoreModule.forRoot({}),
+    EffectsModule.forRoot([]),
     StoreDevtoolsModule.instrument({
       maxAge:25,logOnly:environment.production
     }),

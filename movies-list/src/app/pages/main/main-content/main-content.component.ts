@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Movie } from 'src/app/models/movie';
 import { Store } from '@ngrx/store';
-import { MoviesState } from '../state/movies.reducers';
 
 @Component({
   selector: 'app-main-content',
@@ -9,11 +8,11 @@ import { MoviesState } from '../state/movies.reducers';
   styleUrls: ['./main-content.component.sass']
 })
 export class MainContentComponent implements OnInit {
-  constructor(private store: Store<MoviesState>) { }
+  constructor() { }
 
   ngOnInit(): void {
+
   }
 
-  moviesList: Movie[] = [];
-
+  
 }

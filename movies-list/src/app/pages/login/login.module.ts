@@ -9,8 +9,12 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { MatCardModule } from '@angular/material/card';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
+import {MatDialogModule} from '@angular/material/dialog';
+
 import { StoreModule } from '@ngrx/store';
 import { reducer } from './state/user.reducers';
+import { EffectsModule } from '@ngrx/effects';
+import { UserEffects } from './state/user.effects';
 
 
 @NgModule({
@@ -21,8 +25,10 @@ import { reducer } from './state/user.reducers';
     MatButtonModule,
     MatCardModule,
     MatInputModule,
-    StoreModule.forFeature('user',reducer)
+    MatDialogModule,
+    StoreModule.forFeature('user',reducer),
+    EffectsModule.forFeature([UserEffects])
   ],
-  providers:[LoginService]
+  providers:[LoginService,]
 })
 export class LoginModule { }

@@ -5,68 +5,39 @@ import { LoginService } from 'src/app/services/login.service';
 import { User } from '../../models/user';
 
 import { HttpClient } from '@angular/common/http';
-import { Store } from '@ngrx/store';
-import { LogIn } from './state/user.actions';
+import { Store, select } from '@ngrx/store';
+import { LogIn, ResetError } from './state/user.actions';
 import { State } from 'src/app/state/app.state';
+import { getUserError } from './state/user.reducers';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  //styleUrls: ['./login.component.sass']
-  styles: [
-    `
-      :host {
-        display: flex;
-        justify-content: center;
-        margin: 100px 0px;
-      }
-      
-      .mat-form-field {
-        width: 100%;
-        min-width: 300px;
-      }
-
-      mat-card-title,
-      mat-card-content {
-        display: flex;
-        justify-content: center;
-      }
-
-      .error {
-        padding: 16px;
-        width: 300px;
-        color: white;
-        background-color: red;
-      }
-
-      .button {
-        display: flex;
-        justify-content: flex-end;
-      }
-    `,
-  ],
+  styleUrls: ['./sign-up/sign-up.component.css']
 })
 export class LoginComponent {
+  errorMessage$: Observable<string>;
 
-  constructor(private store: Store<State>, private http: HttpClient, private router: Router, private loginService: LoginService) { }
+  constructor(private store: Store<State>, private http: HttpClient, private router: Router, private loginService: LoginService) {
+
+  }
   form: FormGroup = new FormGroup({
     email: new FormControl('', [Validators.required, Validators.email]),
     password: new FormControl('', [Validators.required, Validators.minLength(6), this.loginService.IsPasswordValid]),
   });
-
-  user: User = new User();
+  ngOnInit(): void {
+    this.errorMessage$ = this.store.pipe(select(getUserError));
+  }
 
   submit() {
-    this.loginService.LogIn(this.form.get('email').value, this.form.get('password').value)
-      .subscribe(user => {
-        if (user) {
-          this.store.dispatch(new LogIn(user));
-          this.router.navigate(['']);
-        }
-      })
+    let email = this.form.get('email').value;
+    let password = this.form.get('password').value;
+    this.store.dispatch(new LogIn({ 'email': email, 'password': password }));
   }
 
   signUp() {
+    this.store.dispatch(new ResetError());
     this.router.navigate(['/sign-up']);
   }
 

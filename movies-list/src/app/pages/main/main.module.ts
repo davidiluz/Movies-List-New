@@ -18,8 +18,13 @@ import { FormsModule } from '@angular/forms';
 import { MatCardModule } from '@angular/material/card';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
+
+
 import { StoreModule } from '@ngrx/store';
 import { reducer } from './state/movies.reducers';
+import { EffectsModule } from '@ngrx/effects';
+import { MoviesEffects } from './state/movies.effects';
+import { MoviesService } from './movies.service';
 
 
 
@@ -38,6 +43,8 @@ import { reducer } from './state/movies.reducers';
     MatInputModule,
     MatButtonModule,
     StoreModule.forFeature('movies', reducer),
-  ]
+    EffectsModule.forFeature([MoviesEffects])
+  ],
+  providers:[MoviesService]
 })
 export class MainModule { }

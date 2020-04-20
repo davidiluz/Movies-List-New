@@ -1,6 +1,6 @@
 <div *ngIf="!hideEditMovie">
   <mat-card>
-    <mat-card-title>Movie Details</mat-card-title>
+    <mat-card-title>Movie's Details</mat-card-title>
     <mat-divider></mat-divider>
     <mat-card-content>
       <div style="margin-top: 7%;" fxLayoutAlign="space-evenly">
@@ -34,13 +34,18 @@
       </div>
       <div style="margin-left: 7%;display: grid;">
         <span style="font-size: 11px;color: darkgrey;margin-bottom: 5px;">Description</span>
-        <textarea matInput style="width: 90%;border: 1px solid grey;padding: 5px;"
+        <textarea matInput style="max-height:130px;width: 90%;border: 1px solid grey;padding: 5px;"
          [(ngModel)]="movie.description" placeholder="Description"></textarea>
       </div>
     </mat-card-content>
     <mat-card-actions>
-      <button mat-button>Add A Review</button>
-      <button mat-button>Watch Reviews</button>
+      <div style="display: flex;width: 85%;justify-content: space-between; margin-left: 8%;;">
+        <button (click)="saveChanges()" mat-raised-button color="primary">Save Changes</button>
+        <button (click)="cancelChanges()" mat-raised-button color="warn">Cancel Changes</button>
+        <button (click)="deleteMovie()" mat-raised-button color="accent">Delete Movie</button>
+      </div>
+
+
     </mat-card-actions>
   </mat-card>
 </div>

@@ -1,10 +1,11 @@
 <mat-card>
     <mat-card-title>Top Movies</mat-card-title>
     <mat-divider></mat-divider>
-    <!-- <div style="padding: 10px;max-height: 500px;overflow-y: auto;"> -->
-        <div *ngFor="let movie of moviesList;let i=index;" (click)="editMovie(movie)" >
-                <mat-card [ngClass]="{'movie':true,'selected-movie':movie.name == selectedMovieName}">{{movie.name}}</mat-card>
-        </div>
-       
-    <!-- </div> -->
+    <div *ngFor="let movie of moviesList$ |async;let i=index;" (click)="editMovie(movie.id)">
+        <mat-card class="movie" [ngClass]="{'selected-movie':movie.name == (selectedMovie$ | async)?.name }">
+            {{movie.name}}</mat-card>
+    </div>
+    <mat-card-actions [ngStyle]="{'display': 'flex','justify-content': 'center','margin-top': '15px'}">
+        <button (click)="editMovie(-1)" mat-raised-button color="primary">Add A Movie</button>
+    </mat-card-actions>
 </mat-card>

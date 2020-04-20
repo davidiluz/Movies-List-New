@@ -1,43 +1,51 @@
-import { Component, OnInit } from '@angular/core';
-import { Store } from '@ngrx/store';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Store, select } from '@ngrx/store';
 import { MoviesState, getSelectedMovie } from '../../state/movies.reducers';
 import { Movie } from 'src/app/models/movie';
+import { takeWhile } from 'rxjs/operators';
+import { MoviesService } from '../../movies.service';
+import * as moviesActions from '../../state/movies.actions';
 
 @Component({
   selector: 'app-edit-movie',
   templateUrl: './edit-movie.component.html',
   styleUrls: ['./edit-movie.component.css']
 })
-export class EditMovieComponent implements OnInit {
+export class EditMovieComponent implements OnInit, OnDestroy {
   movie: Movie = new Movie();
+  isActive = true;
   hideEditMovie: boolean = true;
-  allowEdit:boolean = false;
-  constructor(private store: Store<MoviesState>) { }
+  allowEdit: boolean = true;
+  constructor(private store: Store<MoviesState>, private moviesService: MoviesService) { }
 
   ngOnInit(): void {
-    this.store.select(getSelectedMovie).subscribe(
+    this.store.pipe(select(getSelectedMovie), takeWhile(() => this.isActive)).subscribe(
       selectedMovie => {
-        if (this.hideEditMovie && selectedMovie != null) {
+        if (selectedMovie != null && selectedMovie.id) {
           this.hideEditMovie = false;
-          if(selectedMovie.creationUser){
-            
+          if (selectedMovie.creationUser) {
+
           }
+          this.movie = Object.assign({}, selectedMovie);
         }
-        Object.assign(this.movie, selectedMovie)
-      });
+        else
+          this.hideEditMovie = true;
+
+      })
+  };
+
+  saveChanges() {
+    this.store.dispatch(new moviesActions.AddOrUpdateMovie(this.movie));
   }
 
-  // form: FormGroup = new FormGroup({
-  //   name: new FormControl('', [Validators.required]),
-  //   year: new FormControl('', []),
-  //   rating: new FormControl('', []),
-  //   description: new FormControl('', []),
-  //   director: new FormControl('', []),
-  //   cast: new FormControl('', []),
-  // });
-
-  submit() {
-
+  cancelChanges() {
+    this.store.dispatch(new moviesActions.SelectMovie(this.movie.id));
   }
 
+  deleteMovie() {
+    this.store.dispatch(new moviesActions.DeleteMovie(this.movie.id));
+  }
+  ngOnDestroy() {
+    this.isActive = false
+  }
 }
