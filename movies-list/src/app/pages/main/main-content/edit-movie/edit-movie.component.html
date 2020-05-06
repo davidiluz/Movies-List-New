@@ -1,51 +1,45 @@
-<div *ngIf="!hideEditMovie">
-  <mat-card>
-    <mat-card-title>Movie's Details</mat-card-title>
-    <mat-divider></mat-divider>
-    <mat-card-content>
-      <div style="margin-top: 7%;" fxLayoutAlign="space-evenly">
-        <div fxFlex="40">
-          <mat-form-field>
-            <input type="text" [disabled]="!allowEdit" matInput [(ngModel)]="movie.name" placeholder="Movie Name">
-          </mat-form-field>
-  
-          <mat-form-field>
-            <input type="text" [disabled]="!allowEdit" matInput [(ngModel)]="movie.year" placeholder="Release Date">
-          </mat-form-field>
-  
-          <mat-form-field>
-            <input type="text" [disabled]="!allowEdit" matInput [(ngModel)]="movie.director" placeholder="Director">
-            
-          </mat-form-field>
-        </div>
-        <div fxFlex="40" fxLayout="column">
-          <mat-form-field>
-            <input type="text" matInput [(ngModel)]="movie.cast" placeholder="Cast">
-          </mat-form-field>
+<mat-card>
+  <mat-card-title>Movie's Details</mat-card-title>
+  <mat-divider></mat-divider>
+  <mat-card-content>
+    <form [formGroup]="movieForm">
+      <mat-form-field>
+        <input type="text" formControlName="name" matInput placeholder="Movie Name">
+      </mat-form-field>
 
-          <mat-form-field>
-            <input type="text" [disabled]="!allowEdit" matInput [(ngModel)]="movie.writers" placeholder="Writers">
-          </mat-form-field>
+      <mat-form-field>
+        <input type="text" formControlName="year" matInput placeholder="Release Date">
+      </mat-form-field>
 
-          <mat-form-field>
-            <input type="text" [disabled]="!allowEdit" matInput [(ngModel)]="movie.awards" placeholder="Awards">
-          </mat-form-field>
-        </div>
-      </div>
-      <div style="margin-left: 7%;display: grid;">
-        <span style="font-size: 11px;color: darkgrey;margin-bottom: 5px;">Description</span>
-        <textarea matInput style="max-height:130px;width: 90%;border: 1px solid grey;padding: 5px;"
-         [(ngModel)]="movie.description" placeholder="Description"></textarea>
-      </div>
-    </mat-card-content>
-    <mat-card-actions>
-      <div style="display: flex;width: 85%;justify-content: space-between; margin-left: 8%;;">
-        <button (click)="saveChanges()" mat-raised-button color="primary">Save Changes</button>
-        <button (click)="cancelChanges()" mat-raised-button color="warn">Cancel Changes</button>
-        <button (click)="deleteMovie()" mat-raised-button color="accent">Delete Movie</button>
-      </div>
+      <mat-form-field>
+        <input type="text" formControlName="director" matInput placeholder="Director">
+      </mat-form-field>
+
+      <mat-form-field>
+        <input type="text" formControlName="cast" matInput placeholder="Cast">
+      </mat-form-field>
+
+      <mat-form-field>
+        <input type="text" formControlName="writers" matInput placeholder="Writers">
+      </mat-form-field>
+
+      <mat-form-field>
+        <input type="text" formControlName="awards" matInput placeholder="Awards">
+      </mat-form-field>
+
+      <span style="font-size: 11px;color: darkgrey;margin-bottom: 5px;">Description</span>
+      <textarea matInput style="max-height:130px;width: 90%;border: 1px solid grey;padding: 5px;"
+        formControlName="description" placeholder="Description"></textarea>
+    </form>
+  </mat-card-content>
+  <mat-card-actions>
+    <div style="display: flex;width: 85%;justify-content: space-between; margin-left: 8%;;">
+
+      <button [disabled]="!(movieForm.touched && movieForm.valid)" (click)="save()" mat-raised-button color="primary">Save Changes</button>
+      <button [disabled]="!movieForm.touched"(click)="cancelChanges()" mat-raised-button color="warn">Cancel Changes</button>
+      <button [disabled]="movie.id == -1" (click)="delete()" mat-raised-button color="accent">Delete Movie</button>
+    </div>
 
 
-    </mat-card-actions>
-  </mat-card>
-</div>
+  </mat-card-actions>
+</mat-card>

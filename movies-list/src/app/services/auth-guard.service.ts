@@ -3,7 +3,7 @@ import { Injectable, OnDestroy } from '@angular/core';
 import { Observable } from 'rxjs';
 
 import { Store, select } from '@ngrx/store';
-import { getIsUserLoggedIn } from '../pages/login/state/user.reducers';
+import { getIsUserLoggedIn } from '../pages/login/state';
 import { State } from '../state/app.state';
 import { takeWhile } from 'rxjs/operators';
 

@@ -14,7 +14,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatDividerModule } from '@angular/material/divider';
-import { FormsModule } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
 import { MatCardModule } from '@angular/material/card';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
@@ -38,7 +38,7 @@ import { MoviesService } from './movies.service';
     MatToolbarModule,
     MatTabsModule,
     MatDividerModule,
-    FormsModule,
+    ReactiveFormsModule,
     MatCardModule,
     MatInputModule,
     MatButtonModule,

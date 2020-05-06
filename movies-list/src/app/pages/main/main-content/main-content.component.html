@@ -1,10 +1,21 @@
 <div style="margin-top: 3%;" fxFlex="100">
     <div fxFlex="15" fxLayout="column"></div>
     <div fxFlex="25" fxLayout="column">
-        <app-movies-list></app-movies-list>
+        <app-movies-list 
+        [movies]="moviesList$ | async"
+        [selectedMovie]="selectedMovie$ | async"
+        (edit)="editMovie($event)"
+        ></app-movies-list>
     </div>
     <div fxFlex="10" fxLayout="column"></div>
     <div fxFlex="40" fxLayout="column">
-        <app-edit-movie></app-edit-movie>
+        <app-edit-movie
+        *ngIf="selectedMovie$ | async"
+        [movie]="selectedMovie$ | async" 
+        (saveChanges)="saveChanges($event)" 
+        (deleteMovie)="deleteMovie($event)"
+        >
+
+        </app-edit-movie>
     </div>
 </div>

@@ -6,7 +6,7 @@ import { User } from 'src/app/models/user';
 import { State } from 'src/app/state/app.state';
 import { Store, select } from '@ngrx/store';
 import { SignUp } from '../state/user.actions';
-import { getUserError } from '../state/user.reducers';
+import { getUserError } from '../state';
 import { Observable } from 'rxjs';
 
 @Component({
@@ -24,7 +24,7 @@ export class SignUpComponent implements OnInit {
   form: FormGroup = new FormGroup({
     name: new FormControl(''),
     email: new FormControl('', [Validators.required, Validators.email]),
-    password: new FormControl('', [Validators.required, Validators.minLength(6), this.loginService.IsPasswordValid]),
+    password: new FormControl('', [Validators.required, Validators.minLength(6)]),//, this.loginService.IsPasswordValid]),
   });
 
   submit() {

@@ -1,7 +1,5 @@
 import { User } from 'src/app/models/user';
-import { createFeatureSelector, createSelector } from '@ngrx/store';
-import { UserActions, LogIn, UserActionTypes } from './user.actions';
-import { state } from '@angular/animations';
+import { UserActions, UserActionTypes } from './user.actions';
 
 export interface UserState {
     isLoggedIn: boolean;
@@ -14,8 +12,6 @@ export const initialState: UserState = {
     userData: null,
     error: '',
 };
-
-
 
 
 export function reducer(state: UserState = initialState, action: UserActions): UserState {
@@ -60,20 +56,3 @@ export function reducer(state: UserState = initialState, action: UserActions): U
     }
 }
 
-
-const getUserFeatureState = createFeatureSelector<UserState>('user');
-
-export const getIsUserLoggedIn = createSelector(
-    getUserFeatureState,
-    state => state.isLoggedIn
-)
-
-export const getUserData = createSelector(
-    getUserFeatureState,
-    state => state.userData
-)
-
-export const getUserError = createSelector(
-    getUserFeatureState,
-    state => state.error
-)

@@ -1,51 +1,58 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { Store, select } from '@ngrx/store';
-import { MoviesState, getSelectedMovie } from '../../state/movies.reducers';
+import { Component, OnInit, OnDestroy, Input, Output, EventEmitter, OnChanges, SimpleChanges } from '@angular/core';
 import { Movie } from 'src/app/models/movie';
 import { takeWhile } from 'rxjs/operators';
 import { MoviesService } from '../../movies.service';
-import * as moviesActions from '../../state/movies.actions';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-edit-movie',
   templateUrl: './edit-movie.component.html',
   styleUrls: ['./edit-movie.component.css']
 })
-export class EditMovieComponent implements OnInit, OnDestroy {
-  movie: Movie = new Movie();
-  isActive = true;
-  hideEditMovie: boolean = true;
-  allowEdit: boolean = true;
-  constructor(private store: Store<MoviesState>, private moviesService: MoviesService) { }
+export class EditMovieComponent implements OnChanges{
 
-  ngOnInit(): void {
-    this.store.pipe(select(getSelectedMovie), takeWhile(() => this.isActive)).subscribe(
-      selectedMovie => {
-        if (selectedMovie != null && selectedMovie.id) {
-          this.hideEditMovie = false;
-          if (selectedMovie.creationUser) {
+  movieForm: FormGroup;
 
-          }
-          this.movie = Object.assign({}, selectedMovie);
-        }
-        else
-          this.hideEditMovie = true;
+  @Input() movie: Movie;
+  @Input() allowEdit: boolean;
+  @Output() deleteMovie = new EventEmitter();
+  @Output() saveChanges = new EventEmitter();
 
-      })
-  };
+  constructor(private fb: FormBuilder) { 
+    this.movieForm = this.fb.group({
+      'name': ['', [Validators.required]],
+      'year': [''],
+      'director': [''],
+      'cast': [''],
+      'writers': [''],
+      'awards': [''],
+      'description': [''],
+    })
+  }
 
-  saveChanges() {
-    this.store.dispatch(new moviesActions.AddOrUpdateMovie(this.movie));
+
+  ngOnChanges(changes:SimpleChanges):void{
+    if(changes.movie){
+      this.displayMovie();
+    }
+  }
+
+  displayMovie(){
+    this.movieForm.reset();
+    this.movieForm.patchValue(this.movie);
+  }
+
+  save() {
+    this.saveChanges.emit({...this.movie,...this.movieForm.value} as Movie);
   }
 
   cancelChanges() {
-    this.store.dispatch(new moviesActions.SelectMovie(this.movie.id));
+    this.displayMovie();
   }
 
-  deleteMovie() {
-    this.store.dispatch(new moviesActions.DeleteMovie(this.movie.id));
+  delete() {
+    this.deleteMovie.emit(this.movie.id);
+    
   }
-  ngOnDestroy() {
-    this.isActive = false
-  }
+
 }

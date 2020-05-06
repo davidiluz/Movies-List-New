@@ -1,8 +1,8 @@
 <mat-card>
     <mat-card-title>Top Movies</mat-card-title>
     <mat-divider></mat-divider>
-    <div *ngFor="let movie of moviesList$ |async;let i=index;" (click)="editMovie(movie.id)">
-        <mat-card class="movie" [ngClass]="{'selected-movie':movie.name == (selectedMovie$ | async)?.name }">
+    <div *ngFor="let movie of movies" (click)="editMovie(movie.id)">
+        <mat-card class="movie" [ngClass]="{'selected-movie':movie.name == (selectedMovie)?.name }">
             {{movie.name}}</mat-card>
     </div>
     <mat-card-actions [ngStyle]="{'display': 'flex','justify-content': 'center','margin-top': '15px'}">

@@ -44,17 +44,6 @@ export class LoginService {
             )
     }
 
-    public IsPasswordValid(password: FormControl): { [s: string]: boolean } {
-        if (password) {
-            let ascii = password.value.split('').map(t => t.charCodeAt(0))
-            if (!ascii.find(t => t >= 65 && t <= 90)) {
-                return { 'validPassword': true };
-            }
-            else
-                return null;
-        }
-        else
-            return { 'validPassword': true };
-    }
+
 }
 
